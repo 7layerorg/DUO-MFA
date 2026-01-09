@@ -2,10 +2,6 @@
 
 Duo MFA for pfSense OpenVPN with LDAP Proxy - Direct AD Integration (No NPS Required)
 
-Body:
-Comprehensive guide for implementing Duo MFA with LDAP Authproxy with pfSense OpenVPN using direct Active Directory integration - no NPS server needed!
-This simplifies the traditional Duo setup by eliminating the NPS middleware.
-
 Components Required:
 
     1. pfSense (192.168.0.100) - OpenVPN Server with RADIUS Authentication 
