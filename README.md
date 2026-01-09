@@ -30,29 +30,30 @@ Components Required:
 
 4. Configure Duo Auth Proxy
       Edit: C:\Program Files\Duo Security Authentication Proxy\conf\authproxy.cfg 
-```bash
-    [ad_client]
-    host=192.168.0.145
-    service_account_username=pfsense-service-account
-    service_account_password=********
-    search_dn=DC=testdc,DC=local
-    security_group_dn=CN=VPN,CN=Users,DC=testdc,DC=local
+```ini
+[ad_client]
+host=192.168.0.145
+service_account_username=pfsense-service-account
+service_account_password=********
+search_dn=DC=testdc,DC=local
+security_group_dn=CN=VPN,CN=Users,DC=testdc,DC=local
     
-    ### SLDAP SETUP STARTTLS###
-    transport=starttls    						    ###### This needs to work via secure ldap                  ##  
-    ssl_ca_certs_file=conf/ad_ca.pem 				###### If you remove these three lines it will still work  ##
-    ssl_verify_hostname=false					    ###### but passwords will travel via cleartext!!!          ##
+### SLDAP SETUP STARTTLS###
+transport=starttls    						    ###### This needs to work via secure ldap                  ##  
+ssl_ca_certs_file=conf/ad_ca.pem 				###### If you remove these three lines it will still work  ##
+ssl_verify_hostname=false					    ###### but passwords will travel via cleartext!!!          ##
 
-    [radius_server_auto]
-    ikey=DIQM9X75Z00************
-    skey=QuVjZhVk3cmUTpHf9ML**************
-    api_host=api-ced*****.duosecurity.com
-    radius_ip_1=192.168.0.100   ### This is the pfSense’s IP ###
-    radius_secret_1=*******  ### This password should match in pfSense to this auth proxy radius access ###
-    failmode=safe
-    client=ad_client
-    port=1812
-    client_ip_attr=NAS-IP-Address
+[radius_server_auto]
+ikey=DIQM9X75Z00************
+skey=QuVjZhVk3cmUTpHf9ML**************
+api_host=api-ced*****.duosecurity.com
+radius_ip_1=192.168.0.100   ### This is the pfSense’s IP ###
+radius_secret_1=*******  ### This password should match in pfSense to this auth proxy radius access ###
+failmode=safe
+client=ad_client
+port=1812
+client_ip_attr=NAS-IP-Address
+...
 ```
 
 Run this in Powershell to extract the certificate:
