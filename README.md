@@ -1,4 +1,4 @@
-# DUO-MFA
+# DUO-MFA with LDAP AuthProxy
 
 Duo MFA for pfSense OpenVPN with LDAP Proxy - Direct AD Integration (No NPS Required)
 
