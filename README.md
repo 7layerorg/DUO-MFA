@@ -25,6 +25,7 @@ Components Required:
 
 4. Configure Duo Auth Proxy
       Edit: C:\Program Files\Duo Security Authentication Proxy\conf\authproxy.cfg 
+```bash
     [ad_client]
     host=192.168.0.145
     service_account_username=pfsense-service-account
@@ -47,11 +48,12 @@ Components Required:
     client=ad_client
     port=1812
     client_ip_attr=NAS-IP-Address
+```
 
 Run this in Powershell to extract the certificate:
-
+```powershell
 $dcCert = Get-ChildItem -Path Cert:\LocalMachine\My | Where-Object { $_.EnhancedKeyUsageList.ObjectId -contains "1.3.6.1.5.5.7.3.1" } | Sort-Object NotAfter -Descending | Select-Object -First 1 if ($dcCert) { Write-Host "Found certificate: $($dcCert.Thumbprint)" Write-Host "Subject: $($dcCert.Subject)" $certBytes = $dcCert.Export([System.Security.Cryptography.X509Certificates.X509ContentType]::Cert) $base64 = [System.Convert]::ToBase64String($certBytes) $pem = "-----BEGIN CERTIFICATE-----`n" for ($i = 0; $i -lt $base64.Length; $i += 64) { $length = [Math]::Min(64, $base64.Length - $i) $pem += $base64.Substring($i, $length) + "`n" } $pem += "-----END CERTIFICATE-----" $pem | Out-File "C:\ad_ca.pem" -Encoding ASCII -Force Copy-Item "C:\ad_ca.pem" -Destination "C:\Program Files\Duo Security Authentication Proxy\conf\ad_ca.pem" -Force Write-Host "Certificate exported and copied to Duo Proxy!" } else { Write-Host "ERROR: No LDAP certificate found!" }
-
+```
 
 5. Start Duo Auth Proxy Service
     Command: net start duoauthproxy or use Proxy Manager GUI 
@@ -80,5 +82,6 @@ Key Notes:
     Windows admins manage access via VPN AD group - no pfSense/Duo changes needed 
 
 
+<img width="866" height="577" alt="image" src="https://github.com/user-attachments/assets/053da858-b7a4-4b94-801d-1ffc631084bb" />
 
 
