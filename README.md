@@ -30,7 +30,7 @@ Components Required:
 
 4. Configure Duo Auth Proxy
       Edit: C:\Program Files\Duo Security Authentication Proxy\conf\authproxy.cfg 
-```conf
+```text
 [ad_client]
 host=192.168.0.145
 service_account_username=pfsense-service-account
