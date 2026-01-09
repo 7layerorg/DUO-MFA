@@ -86,6 +86,7 @@ Key Notes:
     Username normalization handles test, testdc\test, testdc.local\test formats 
     Windows admins manage access via VPN AD group - no pfSense/Duo changes needed 
 
+https://duo.com/docs/ldap
 
 <img width="866" height="577" alt="image" src="https://github.com/user-attachments/assets/053da858-b7a4-4b94-801d-1ffc631084bb" />
 
